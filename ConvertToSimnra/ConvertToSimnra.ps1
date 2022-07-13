@@ -6,7 +6,8 @@ param (
     [Parameter(Mandatory = $true)]$Path,
     # 入力された数のchannel数ごとに和をとって1つのchannel（ビン）にします
     [Parameter()][ValidateRange(1, 1000)][int]$BinWidth = 1,
-    [Parameter()][ValidateRange(1, 100000)][int]$MaxCh = 10000
+    [Parameter()][ValidateRange(1, 100000)][int]$RbsMaxCh = 10000,
+    [Parameter()][ValidateRange(1, 100000)][int]$ErdMaxCh = 10000
 )
 
 Write-Output $path
@@ -58,12 +59,23 @@ $rbsFileName = Join-Path $outDir "$($baseName)_rbs.dat"
 $erdFileName = Join-Path $outDir "$($baseName)_erd.dat"
 $processedCsvFileName = Join-Path $outDir "$($baseName)_.csv"
 
-if ($MaxCh -eq 0) {
-    $MaxCh = $processedData.Length
+if ($RbsMaxCh -eq 0) {
+    $RbsMaxCh = $processedData.Length
+}
+if ($ErdMaxCh -eq 0) {
+    $ErdMaxCh = $processedData.Length
+}
+[int]$MaxCh = 0
+if ($RbsMaxCh -gt $ErdMaxCh) {
+    $MaxCh = $RbsMaxCh
+}
+else {
+    $MaxCh = $ErdMaxCh
 }
 
-$processedData[0..$MaxCh] | Select-Object -Property "ch", "CH1" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Out-File -Force -FilePath $rbsFileName -Encoding utf8
-$processedData[0..$MaxCh] | Select-Object -Property "ch", "CH2" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Out-File -Force -FilePath $erdFileName -Encoding utf8
+
+$processedData[0..$RbsMaxCh] | Select-Object -Property "ch", "CH1" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Out-File -Force -FilePath $rbsFileName -Encoding utf8
+$processedData[0..$ErdMaxCh] | Select-Object -Property "ch", "CH2" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Out-File -Force -FilePath $erdFileName -Encoding utf8
 $processedData[0..$MaxCh] | ConvertTo-Csv -QuoteFields False -Delimiter "," | Out-File -Force -FilePath $processedCsvFileName -Encoding utf8
 
 Write-Output "--- RBS ---"
