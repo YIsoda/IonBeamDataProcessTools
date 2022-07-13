@@ -116,11 +116,18 @@ ch CH1 CH2
 
 </details>
 
-### `-MaxCh` (nonnegative integer)
+### `-RbsMaxCh` (nonnegative integer)
 
-出力する最大のチャネルを指定します。
+RBSデータで出力する最大のチャネルを指定します。
 
-Specifies the maximum number of channels to output.
+Specifies the maximum number of channels to output in RBS data.
+
+### `-ErdMaxCh` (nonnegative integer)
+
+ERDデータで出力する最大のチャネルを指定します。
+
+Specifies the maximum number of channels to output in ERD data.
+
 <!--
 ### `-OutputFolder`
 
