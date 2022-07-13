@@ -5,6 +5,8 @@
 
 # ConvertFormatToSimnra
 
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/ConvertToSimnra?style=flat-square)](https://www.powershellgallery.com/packages/ConvertToSimnra/0.0.3)
+
 イオンビーム測定で得られた生データファイルをSIMNRAで読み込み可能なAscii形式（2列）に変換します。
 Converts the file obtained from ion beam measurents to the ascii data format (two columns) SIMNRA can read.
 
@@ -71,7 +73,7 @@ ch	CH1
 
 ```powershell
 ConvertTo-Simnra -Path path_to_file.csv
-# yields `Dat/OriginalFileName_RBS.dat`, `Dat/OriginalFileName_RBS.dat` and `Dat/OriginalFileName.csv`
+# yields `Dat/OriginalFileName_rbs.dat`, `Dat/OriginalFileName_erd.dat` and `Dat/OriginalFileName.csv`
 ```
 
 ## Options
