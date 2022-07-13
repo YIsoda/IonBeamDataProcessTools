@@ -1,21 +1,21 @@
-#!pwsh
+#!usr/bin/env powershell
 # https://github.com/YIsoda/IonBeamDataProcessTools
 
-# function ConvertTo-Simnra {
+[CmdletBinding()]
 param (
-    $Path,
+    [Parameter(Mandatory = $true)]$Path,
     # 入力された数のchannel数ごとに和をとって1つのchannel（ビン）にします
     [Parameter()][ValidateRange(1, 1000)][int]$BinWidth = 1,
-    [Parameter()][ValidateRange(1, 100000)][int]$MaxCh 
+    [Parameter()][ValidateRange(1, 100000)][int]$MaxCh = 10000
 )
 
-Write-Host $path
+Write-Output $path
 
 # ファイルをCSV形式として読み込む
 # "Select" operation in .NET, a.k.a. "map" in other language (https://en.wikipedia.org/wiki/Map_(higher-order_function))
 $fileContent = Import-Csv $path -Header "ch", "CH1", "CH2", "CH3", "CH4" | Select-Object -Property ch, CH1, CH2
 
-# 最初の列の値が"[Data]"である行のインデックスを求める 
+# 最初の列の値が"[Data]"である行のインデックスを求める
 $dataStartIndex = [array]::IndexOf($fileContent.ch, "[Data]")
 $rawData = $fileContent[($dataStartIndex + 2)..($fileContent.Length)]
 
@@ -28,7 +28,7 @@ elseif ($BinWidth -gt 1) {
     $rowsInChunk = @(0, 0)
     [int]$chunkCount = 0
     [int]$channelsCount = 0
-    foreach ($channelRow in 
+    foreach ($channelRow in
         ($rawData | Select-Object -Property CH1, CH2)
     ) {
         $rowsInChunk[0] += $channelRow.CH1
@@ -48,7 +48,6 @@ elseif ($BinWidth -gt 1) {
 }
 
 
-# Write-Host $rawData[0..15] 
 
 $outDir = Join-Path (Get-Item $Path).DirectoryName "Dat"
 if (-not (Test-Path $outDir)) {
@@ -67,9 +66,8 @@ $processedData[0..$MaxCh] | Select-Object -Property "ch", "CH1" | ConvertTo-Csv 
 $processedData[0..$MaxCh] | Select-Object -Property "ch", "CH2" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Out-File -Force -FilePath $erdFileName -Encoding utf8
 $processedData[0..$MaxCh] | ConvertTo-Csv -QuoteFields False -Delimiter "," | Out-File -Force -FilePath $processedCsvFileName -Encoding utf8
 
-Write-Host "--- RBS ---"
-$processedData[0..10] | Select-Object -Property "ch", "CH1" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Write-Host
-Write-Host "--- ERD ---"
-$processedData[0..10] | Select-Object -Property "ch", "CH2" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Write-Host
+Write-Output "--- RBS ---"
+$processedData[0..10] | Select-Object -Property "ch", "CH1" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Write-Output
+Write-Output "--- ERD ---"
+$processedData[0..10] | Select-Object -Property "ch", "CH2" | ConvertTo-Csv -QuoteFields False -Delimiter "`t" | Write-Output
 
-# }
