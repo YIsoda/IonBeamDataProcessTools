@@ -58,12 +58,10 @@ ch	CH1
 ## 使用方法 / Usage
 
 - 動作環境 System Requirements
-    - Windows: OSに含まれるWindows PowerShell 5.xを使うことができます。新世代の[PowerShell 7](https://docs.microsoft.com/ja-jp/powershell/scripting/overview)（[インストール方法](https://docs.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows)，[GitHub](https://github.com/PowerShell/PowerShell)）もおすすめです。
-      
-      You can use Windows PowerShell 5.x included in the Windows OS. The new generation [PowerShell 7](https://docs.microsoft.com/en-us/powershell/scripting/overview) ([instalation](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows) / [GitHub](https://github.com/PowerShell/PowerShell)) is also recommended.
-    - Other platforms: クロスプラットフォームのPowerShell 7をインストールしてください。
-      
-      Please install cross-platform PowerShell 7（[macOS](https://docs.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-macos)，[others](https://docs.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-linux)）
+    - [PowerShell 7](https://docs.microsoft.com/ja-jp/powershell/scripting/overview)（[インストール方法](https://docs.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows)，[GitHub](https://github.com/PowerShell/PowerShell)，[Microsoft Store](https://apps.microsoft.com/store/detail/powershell/9MZ1SNWT0N5D)）が必須ですのでインストールしてください。
+    
+      Requires [PowerShell 7](https://docs.microsoft.com/en-us/powershell/scripting/overview) ([instalation](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows) / [GitHub](https://github.com/PowerShell/PowerShell) / [Microsoft Store](https://apps.microsoft.com/store/detail/powershell/9MZ1SNWT0N5D)), so please install it.
+
 - Installation (from [PowerShell Gallery](https://www.powershellgallery.com/packages/ConvertToSimnra/0.0.3) )
   ```powershell
   Install-Module -Name ConvertToSimnra -Scope CurrentUser
