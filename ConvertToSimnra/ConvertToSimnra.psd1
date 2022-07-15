@@ -12,7 +12,7 @@
 RootModule = 'ConvertToSimnra.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.4.0'
+ModuleVersion = '0.5.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -31,10 +31,10 @@ Copyright = '(c) Yosuke Isoda. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'イオンビーム測定で得られた生データファイルをSIMNRAで読み込み可能なAscii形式（2列）に変換します。
-Converts the file obtained from ion beam measurents to the ascii data format (two columns) SIMNRA can read.'
+Converts the file obtained from ion beam measurents to the ascii data format (two columns) SIMNRA can read. PowerShell 7.x is required.'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
