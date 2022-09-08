@@ -70,7 +70,7 @@ ch	CH1
 ### 実行 / Execute the command
 
 ```powershell
-ConvertTo-Simnra -Path path_to_file.csv
+ConvertTo-Simnra path_to_file.csv
 # yields `Dat/OriginalFileName_rbs.dat`, `Dat/OriginalFileName_erd.dat` and `Dat/OriginalFileName.csv`
 ```
 
@@ -83,6 +83,13 @@ ConvertTo-Simnra -Path path_to_file.csv
 測定装置により得られた生のCSVファイルへのパスを指定します。
 
 Specify the path to the raw CSV file obtained by the instrument.
+
+  - `-Path` パラメーターとして指定する代わりに，以下のように他のオプションより前にパラメーター名なしで直接指定できます。
+
+    Instead of specifying it as a `-Path` parameter, it can be specified directly without any parameter name, before other options as follows
+    ```powershell
+    ConvertTo-Simnra path_to_file.csv -BinWidth 2 # -<OtherParameters> <Value> ...
+    ```
 
 ### `-BinWidth` (nonnegative integer)
 
@@ -140,9 +147,3 @@ Specifies the maximum number of channels to output in ERD data.
 CH1～CH4のうちどのチャネルがRBS信号に対応するかを指定します
 
 -->
-
-## LICENSE
-
-本スクリプトはMITライセンスで公開しますが，共同研究者の皆様が研究室内で再利用する場合は著作権表記なしで複製・変更の上利用していただいてかまいません。
-
-This script is released under the MIT license, but may be reproduced without copyright notice for reuse by my collaborators in their laboratories.
